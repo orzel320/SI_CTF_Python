@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SI_CTF_Python"
+version = "0.1.0"
+description = "AI-played CTF game made using Unreal Engine 5 communicating with AI module made in Python via OCS bridge"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "python-osc",
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

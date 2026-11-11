@@ -7,7 +7,7 @@ from point import Point
 
 
 def _distance(p1: Point, p2: Point) -> float:
-    return math.distance((p1["x"], p1["y"]), (p2["x"], p2["y"]))
+    return math.dist((p1["x"], p1["y"]), (p2["x"], p2["y"]))
 
 
 def _is_closer(
@@ -109,33 +109,25 @@ def step_advanced_decision_tree(
             return map_points["enemy_mid"]
     else:
         if i_carry_flag:
-            if _is_closer(
-                my_pos, enemy_pos, map_points["my_base"], required_difference=2.0
-            ):
+            if _is_closer(my_pos, enemy_pos, map_points["my_base"], required_difference=2.0):
                 return map_points["my_base"]
             else:
                 if _is_closer(map_points["my_base"], map_points["enemy_base"], my_pos):
                     if _is_same_side(my_pos, enemy_pos, map_points):
                         if _side_of_map(my_pos, map_points) == "left":
-                            if _is_closer(
-                                map_points["mid"], map_points["my_right"], my_pos
-                            ):
+                            if _is_closer(map_points["mid"], map_points["my_right"], my_pos):
                                 return map_points["my_right"]
                             else:
                                 return map_points["mid"]
                         else:
-                            if _is_closer(
-                                map_points["mid"], map_points["my_left"], my_pos
-                            ):
+                            if _is_closer(map_points["mid"], map_points["my_left"], my_pos):
                                 return map_points["my_left"]
                             else:
                                 return map_points["mid"]
                     else:
                         return map_points["my_base"]
                 else:
-                    if _is_closer(
-                        map_points["my_base"], map_points["enemy_base"], enemy_pos
-                    ):
+                    if _is_closer(map_points["my_base"], map_points["enemy_base"], enemy_pos):
                         if _is_closer(
                             my_pos,
                             enemy_pos,

@@ -98,9 +98,7 @@ def _convert_to_team_relative(
     return blue_perspective, red_perspective
 
 
-def eval_map_points(
-    blue_base: Point, red_base: Point
-) -> tuple[dict[str, Point], dict[str, Point]]:
+def eval_map_points(blue_base: Point, red_base: Point) -> tuple[dict[str, Point], dict[str, Point]]:
     """Evaluate map points based on the positions of both team bases.
 
     Calculates absolute map points and converts them to team-relative

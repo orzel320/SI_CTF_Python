@@ -66,9 +66,7 @@ def run_game_loop(
     )
     maps: dict[str, dict[str, Point]] = {}
 
-    def on_init(
-        packet_id: int, b1_x: float, b1_y: float, b2_x: float, b2_y: float
-    ) -> None:
+    def on_init(packet_id: int, b1_x: float, b1_y: float, b2_x: float, b2_y: float) -> None:
         """Calculates relative map points and replies 'ok'."""
         b1: Point = {"x": float(b1_x), "y": float(b1_y)}
         b2: Point = {"x": float(b2_x), "y": float(b2_y)}
@@ -87,9 +85,7 @@ def run_game_loop(
     ) -> None:
         """Calls both AI functions and sends destinations back to UE5."""
         if "p1" not in maps or "p2" not in maps:
-            logger.warning(
-                "Ignored 'step' (packet_id=%d): match not initialized yet.", packet_id
-            )
+            logger.warning("Ignored 'step' (packet_id=%d): match not initialized yet.", packet_id)
             return
 
         p1_pos: Point = {"x": float(p1_x), "y": float(p1_y)}
@@ -105,9 +101,7 @@ def run_game_loop(
 
     def on_end(packet_id: int, winner_id: int) -> None:
         """Acknowledges match end and resets stored maps."""
-        logger.info(
-            "Match ended (packet_id=%d). Winner Player ID: %d", packet_id, winner_id
-        )
+        logger.info("Match ended (packet_id=%d). Winner Player ID: %d", packet_id, winner_id)
         maps.clear()
         osc.send_ok(packet_id)
 

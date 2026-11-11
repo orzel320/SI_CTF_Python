@@ -81,9 +81,7 @@ class OSCMessenger:
             packet_id = int(args[1])
             handler(packet_id, *args[2:])
         except (TypeError, ValueError) as exc:
-            logger.error(
-                "Invalid payload for flag '%s' (args=%s): %s", flag, args[1:], exc
-            )
+            logger.error("Invalid payload for flag '%s' (args=%s): %s", flag, args[1:], exc)
 
     def send(self, flag: str, packet_id: int, *data: Any) -> None:
         """Sends a formatted OSC packet to Unreal Engine.

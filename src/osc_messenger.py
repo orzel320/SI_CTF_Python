@@ -1,10 +1,13 @@
 """Standalone OSC communication module for Unreal Engine 5 and Python."""
 
+import logging
 from typing import Any, Callable
 
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import BlockingOSCUDPServer
 from pythonosc.udp_client import SimpleUDPClient
+
+logger = logging.getLogger(__name__)
 
 
 class OSCMessenger:
@@ -53,18 +56,34 @@ class OSCMessenger:
         """
         self.handlers[flag] = callback
 
-    def _on_message(self, address: str, flag: str, packet_id: int, *data: Any) -> None:
-        """Routes incoming OSC packets to the corresponding registered handler.
+    def _on_message(self, address: str, *args: Any) -> None:
+        """Validates and routes incoming OSC packets to the registered handler.
 
         Args:
             address (str): Incoming OSC address path.
-            flag (str): Packet type identifier ('init', 'step', or 'end').
-            packet_id (int): Sequence identifier of the incoming packet.
-            *data (Any): Remaining payload arguments sent by Unreal Engine.
+            *args (Any): Raw payload arguments sent by Unreal Engine.
         """
+        if len(args) < 2:
+            logger.warning(
+                "Dropped malformed packet on %s (expected flag and packet_id): %s",
+                address,
+                args,
+            )
+            return
+
+        flag = str(args[0])
         handler = self.handlers.get(flag)
-        if handler:
-            handler(packet_id, *data)
+        if not handler:
+            logger.warning("No handler registered for flag '%s' on %s", flag, address)
+            return
+
+        try:
+            packet_id = int(args[1])
+            handler(packet_id, *args[2:])
+        except (TypeError, ValueError) as exc:
+            logger.error(
+                "Invalid payload for flag '%s' (args=%s): %s", flag, args[1:], exc
+            )
 
     def send(self, flag: str, packet_id: int, *data: Any) -> None:
         """Sends a formatted OSC packet to Unreal Engine.
@@ -104,8 +123,15 @@ class OSCMessenger:
         self.send("step", packet_id, p1_dest_x, p1_dest_y, p2_dest_x, p2_dest_y)
 
     def start(self) -> None:
-        """Starts the blocking OSC server loop."""
-        self.server.serve_forever()
+        """Starts the blocking OSC server loop and handles Ctrl+C shutdown."""
+        ip, port = self.server.server_address
+        logger.info("OSC server listening on %s:%s", ip, port)
+        try:
+            self.server.serve_forever()
+        except KeyboardInterrupt:
+            logger.info("Stopping OSC server...")
+        finally:
+            self.server.server_close()
 
     def stop(self) -> None:
         """Stops the OSC server and releases the socket."""

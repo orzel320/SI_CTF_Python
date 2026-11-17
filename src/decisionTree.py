@@ -1,13 +1,9 @@
 """Provides decision-tree based strategies and helper functions for CTF agents."""
 
-import math
 from typing import Literal
 
+from geometry_utils import distance
 from point import Point
-
-
-def _distance(p1: Point, p2: Point) -> float:
-    return math.dist((p1["x"], p1["y"]), (p2["x"], p2["y"]))
 
 
 def _is_closer(
@@ -16,7 +12,7 @@ def _is_closer(
     dest: Point,
     required_difference: float = 0.0,
 ) -> bool:
-    return _distance(pos1, dest) + required_difference <= _distance(pos2, dest)
+    return distance(pos1, dest) + required_difference <= distance(pos2, dest)
 
 
 def _side_of_map(pos1: Point, map_points: dict[str, Point]) -> Literal["left", "right"]:
@@ -33,6 +29,10 @@ def _side_of_map(pos1: Point, map_points: dict[str, Point]) -> Literal["left", "
 
 def _is_same_side(pos1: Point, pos2: Point, map_points: dict[str, Point]) -> bool:
     return _side_of_map(pos1, map_points) == _side_of_map(pos2, map_points)
+
+
+def _is_close(src: Point, dest: Point, threshold: float = 250.0) -> bool:
+    return distance(src, dest) <= threshold
 
 
 def step_simple_decision_tree(
@@ -97,70 +97,103 @@ def step_advanced_decision_tree(
         Target point for the agent's next movement.
     """
     if enemy_carry_flag:
-        if _is_closer(my_pos, enemy_pos, map_points["my_base"], required_difference=2):
+        if _is_closer(
+            my_pos,
+            enemy_pos,
+            map_points["enemy_base"],
+        ):
             if _is_same_side(my_pos, enemy_pos, map_points):
-                return enemy_pos
+                return "1", enemy_pos
             else:
                 if _is_closer(map_points["my_base"], map_points["enemy_base"], my_pos):
-                    return map_points["mid"]
+                    return "2", map_points["mid"]
                 else:
-                    return map_points["enemy_mid"]
+                    return "3", map_points["enemy_mid"]
         else:
-            return map_points["enemy_mid"]
+            return "4", map_points["enemy_mid"]
     else:
         if i_carry_flag:
-            if _is_closer(my_pos, enemy_pos, map_points["my_base"], required_difference=2.0):
-                return map_points["my_base"]
+            if _is_closer(
+                my_pos,
+                enemy_pos,
+                map_points["my_base"],
+            ):
+                if _is_close(my_pos, map_points["enemy_mid"]):
+                    if _side_of_map(my_pos, map_points) == "left":
+                        return "5", map_points["enemy_left"]
+                    else:
+                        return "6", map_points["enemy_right"]
+                else:
+                    if _is_close(my_pos, map_points["mid"]):
+                        if _side_of_map(my_pos, map_points) == "left":
+                            return "7", map_points["my_left"]
+                        else:
+                            return "8", map_points["my_right"]
+                    else:
+                        return "9", map_points["my_base"]
+
             else:
                 if _is_closer(map_points["my_base"], map_points["enemy_base"], my_pos):
                     if _is_same_side(my_pos, enemy_pos, map_points):
-                        if _side_of_map(my_pos, map_points) == "left":
-                            if _is_closer(map_points["mid"], map_points["my_right"], my_pos):
-                                return map_points["my_right"]
+                        if _is_closer(
+                            map_points["mid"],
+                            map_points["my_mid"],
+                            my_pos,
+                            required_difference=150.0,
+                        ):
+                            if _side_of_map(my_pos, map_points) == "left":
+                                return "10", map_points["my_right"]
                             else:
-                                return map_points["mid"]
+                                return "11", map_points["my_left"]
                         else:
-                            if _is_closer(map_points["mid"], map_points["my_left"], my_pos):
-                                return map_points["my_left"]
-                            else:
-                                return map_points["mid"]
+                            return "12", map_points["mid"]
+
                     else:
-                        return map_points["my_base"]
+                        if _is_close(my_pos, map_points["mid"]):
+                            if _side_of_map(my_pos, map_points) == "left":
+                                return "13", map_points["my_left"]
+                            else:
+                                return "14", map_points["my_right"]
+                        else:
+                            return "15", map_points["my_base"]
+
                 else:
-                    if _is_closer(map_points["my_base"], map_points["enemy_base"], enemy_pos):
+                    if _is_closer(
+                        map_points["my_base"], map_points["enemy_base"], enemy_pos
+                    ):
                         if _is_closer(
                             my_pos,
                             enemy_pos,
                             map_points["mid"],
-                            required_difference=2.0,
                         ):
-                            return map_points["mid"]
+                            return "16", map_points["mid"]
                         else:
                             if _side_of_map(my_pos, map_points) == "left":
-                                return map_points["enemy_left"]
+                                return "17", map_points["enemy_left"]
                             else:
-                                return map_points["enemy_right"]
+                                return "18", map_points["enemy_right"]
                     else:
                         if _is_same_side(my_pos, enemy_pos, map_points):
-                            if _side_of_map(my_pos, map_points) == "left":
-                                if _is_closer(
-                                    map_points["enemy_mid"],
-                                    map_points["enemy_right"],
-                                    my_pos,
-                                ):
-                                    return map_points["enemy_right"]
+                            if _is_closer(
+                                map_points["enemy_mid"],
+                                map_points["mid"],
+                                my_pos,
+                                required_difference=150.0,
+                            ):
+                                if _side_of_map(my_pos, map_points) == "left":
+                                    return "19", map_points["enemy_right"]
                                 else:
-                                    return map_points["enemy_mid"]
+                                    return "20", map_points["enemy_left"]
                             else:
-                                if _is_closer(
-                                    map_points["enemy_mid"],
-                                    map_points["enemy_left"],
-                                    my_pos,
-                                ):
-                                    return map_points["enemy_left"]
-                                else:
-                                    return map_points["enemy_mid"]
+                                return "21", map_points["enemy_mid"]
                         else:
-                            return map_points["mid"]
+                            if _is_close(my_pos, map_points["enemy_mid"]):
+                                if _side_of_map(my_pos, map_points) == "left":
+                                    return "22", map_points["enemy_left"]
+                                else:
+                                    return "23", map_points["enemy_right"]
+                            else:
+                                return "24", map_points["mid"]
+
         else:
-            return map_points["enemy_base"]
+            return "25", map_points["enemy_base"]

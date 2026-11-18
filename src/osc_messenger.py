@@ -81,7 +81,9 @@ class OSCMessenger:
             packet_id = int(args[1])
             handler(packet_id, *args[2:])
         except (TypeError, ValueError) as exc:
-            logger.error("Invalid payload for flag '%s' (args=%s): %s", flag, args[1:], exc)
+            logger.error(
+                "Invalid payload for flag '%s' (args=%s): %s", flag, args[1:], exc
+            )
 
     def send(self, flag: str, packet_id: int, *data: Any) -> None:
         """Sends a formatted OSC packet to Unreal Engine.
@@ -119,6 +121,16 @@ class OSCMessenger:
             p2_dest_y (float): Target Y coordinate for Player 2.
         """
         self.send("step", packet_id, p1_dest_x, p1_dest_y, p2_dest_x, p2_dest_y)
+
+    def send_reset(self, packet_id: int) -> None:
+        """Sends a 'reset' request to Unreal Engine.
+
+        Should be used only as an alternative for acknowledgment of an 'end' package.
+
+        Args:
+            packet_id (int): ID of the received 'end' package.
+        """
+        self.send("reset", packet_id)
 
     def start(self) -> None:
         """Starts the blocking OSC server loop and handles Ctrl+C shutdown."""

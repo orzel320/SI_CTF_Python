@@ -103,14 +103,14 @@ def step_advanced_decision_tree(
             map_points["enemy_base"],
         ):
             if _is_same_side(my_pos, enemy_pos, map_points):
-                return "1", enemy_pos
+                return enemy_pos
             else:
                 if _is_closer(map_points["my_base"], map_points["enemy_base"], my_pos):
-                    return "2", map_points["mid"]
+                    return map_points["mid"]
                 else:
-                    return "3", map_points["enemy_mid"]
+                    return map_points["enemy_mid"]
         else:
-            return "4", map_points["enemy_mid"]
+            return map_points["enemy_mid"]
     else:
         if i_carry_flag:
             if _is_closer(
@@ -120,17 +120,17 @@ def step_advanced_decision_tree(
             ):
                 if _is_close(my_pos, map_points["enemy_mid"]):
                     if _side_of_map(my_pos, map_points) == "left":
-                        return "5", map_points["enemy_left"]
+                        return map_points["enemy_left"]
                     else:
-                        return "6", map_points["enemy_right"]
+                        return map_points["enemy_right"]
                 else:
                     if _is_close(my_pos, map_points["mid"]):
                         if _side_of_map(my_pos, map_points) == "left":
-                            return "7", map_points["my_left"]
+                            return map_points["my_left"]
                         else:
-                            return "8", map_points["my_right"]
+                            return map_points["my_right"]
                     else:
-                        return "9", map_points["my_base"]
+                        return map_points["my_base"]
 
             else:
                 if _is_closer(map_points["my_base"], map_points["enemy_base"], my_pos):
@@ -142,20 +142,20 @@ def step_advanced_decision_tree(
                             required_difference=150.0,
                         ):
                             if _side_of_map(my_pos, map_points) == "left":
-                                return "10", map_points["my_right"]
+                                return map_points["my_right"]
                             else:
-                                return "11", map_points["my_left"]
+                                return map_points["my_left"]
                         else:
-                            return "12", map_points["mid"]
+                            return map_points["mid"]
 
                     else:
                         if _is_close(my_pos, map_points["mid"]):
                             if _side_of_map(my_pos, map_points) == "left":
-                                return "13", map_points["my_left"]
+                                return map_points["my_left"]
                             else:
-                                return "14", map_points["my_right"]
+                                return map_points["my_right"]
                         else:
-                            return "15", map_points["my_base"]
+                            return map_points["my_base"]
 
                 else:
                     if _is_closer(
@@ -166,12 +166,12 @@ def step_advanced_decision_tree(
                             enemy_pos,
                             map_points["mid"],
                         ):
-                            return "16", map_points["mid"]
+                            return map_points["mid"]
                         else:
                             if _side_of_map(my_pos, map_points) == "left":
-                                return "17", map_points["enemy_left"]
+                                return map_points["enemy_left"]
                             else:
-                                return "18", map_points["enemy_right"]
+                                return map_points["enemy_right"]
                     else:
                         if _is_same_side(my_pos, enemy_pos, map_points):
                             if _is_closer(
@@ -181,19 +181,19 @@ def step_advanced_decision_tree(
                                 required_difference=150.0,
                             ):
                                 if _side_of_map(my_pos, map_points) == "left":
-                                    return "19", map_points["enemy_right"]
+                                    return map_points["enemy_right"]
                                 else:
-                                    return "20", map_points["enemy_left"]
+                                    return map_points["enemy_left"]
                             else:
-                                return "21", map_points["enemy_mid"]
+                                return map_points["enemy_mid"]
                         else:
                             if _is_close(my_pos, map_points["enemy_mid"]):
                                 if _side_of_map(my_pos, map_points) == "left":
-                                    return "22", map_points["enemy_left"]
+                                    return map_points["enemy_left"]
                                 else:
-                                    return "23", map_points["enemy_right"]
+                                    return map_points["enemy_right"]
                             else:
-                                return "24", map_points["mid"]
+                                return map_points["mid"]
 
         else:
-            return "25", map_points["enemy_base"]
+            return map_points["enemy_base"]

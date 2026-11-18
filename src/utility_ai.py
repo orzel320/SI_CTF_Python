@@ -67,9 +67,9 @@ def u_base(
     Returns:
         float: Baseline utility value.
     """
-    return params.w_terr * territory_polarity(c, b_my, b_en) - params.w_travel * norm_dist(
-        p_my, c, scale
-    )
+    return params.w_terr * territory_polarity(
+        c, b_my, b_en
+    ) - params.w_travel * norm_dist(p_my, c, scale)
 
 
 def u_returning(
@@ -96,7 +96,10 @@ def u_returning(
         float: Tactical utility when returning home with the flag.
     """
     phi = threat_repulsion(c, p_my, p_en, scale, params.epsilon)
-    return -params.w_goal * norm_dist(c, b_my, scale) - params.w_threat * params.alpha * phi
+    return (
+        -params.w_goal * norm_dist(c, b_my, scale)
+        - params.w_threat * params.alpha * phi
+    )
 
 
 def u_defending(
@@ -265,6 +268,7 @@ def utility_agent(
     my_carry_flag: bool,
     enemy_carry_flag: bool,
     my_map: dict[str, Point],
+    params: UtilityParams = DEFAULT_PARAMS,
 ) -> Point:
     r"""Selects c^* = argmax_{c in C} U(c | S) for the current game step.
 
@@ -274,6 +278,7 @@ def utility_agent(
         my_carry_flag (bool): Flag state f_{my}.
         enemy_carry_flag (bool): Flag state f_{en}.
         my_map (dict[str, Point]): Team-relative map waypoints M.
+        params (UtilityParams): Instance of parameters to be used.
 
     Returns:
         Point: Optimal destination point c^*.
@@ -284,9 +289,11 @@ def utility_agent(
         my_carry_flag,
         enemy_carry_flag,
         my_map,
-        DEFAULT_PARAMS.r_arr,
+        params.r_arr,
     )
     return max(
         candidates,
-        key=lambda c: u_total(c, my_pos, enemy_pos, my_carry_flag, enemy_carry_flag, my_map),
+        key=lambda c: u_total(
+            c, my_pos, enemy_pos, my_carry_flag, enemy_carry_flag, my_map, params
+        ),
     )

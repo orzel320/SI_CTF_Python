@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="ctf_presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ctf_presentation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="ctf_presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="ctf_presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="ctf_presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ctf_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="ctf_presentation_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <title>ctf_presentation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="ctf_presentation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="ctf_presentation_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="ctf_presentation_files/libs/revealjs/dist/theme/quarto-de978f04bd247b6e525951479655d0d2.css">
+  <link href="ctf_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="ctf_presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="ctf_presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="ctf_presentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2 dark-title">
+<h2></h2>
+<div class="main-title">
+<p>Capture The Flag</p>
+</div>
+<div class="subtitle">
+<p>Autonomiczne boty AI w Unreal Engine 5 — architektura UE5 + Python (OSC), drzewa decyzyjne i funkcja użyteczności i jej optymalizacja (Optuna)</p>
+</div>
+<div class="authors-box">
+<p><span class="authors">Radosław Iskra, Rafał Oszajca, Szymon Konieczny</span></p>
+</div>
+</section>
+<section id="problem-cel-projektu-i-podział-prac" class="slide level2">
+<h2>Problem, cel projektu i podział prac</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<h3 id="problem-i-cel">Problem i cel</h3>
+<ul>
+<li>Wykorzystanie metod sztucznej inteligencji w klasycznym trybie rozgrywki CTF.</li>
+<li>Implementacja gry 1v1, w której dwa autonomiczne boty AI rywalizują o przejęcie flagi przeciwnika.</li>
+<li>Oddzielenie gry (Unreal Engine 5) od logiki decyzyjnej (Python).</li>
+</ul>
+</div><div class="column" style="width:58%;">
+<div class="arch-card">
+<div class="arch-num">
+<p>01</p>
+</div>
+<div class="card-body">
+<p><strong>Radosław Iskra</strong></p>
+<p>Implementacja projektu po stronie Unreal Engine 5, research oraz wstępna implementacja komunikacji OSC między Pythonem a silnikiem.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>02</p>
+</div>
+<div class="card-body">
+<p><strong>Szymon Konieczny</strong></p>
+<p>Drzewa decyzyjne, moduł treningowy funkcji użyteczności, restart gry z Pythona, wybór algorytmów AI przez CLI, diagramy architektury i obliczanie punktów na mapie.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>03</p>
+</div>
+<div class="card-body">
+<p><strong>Rafał Oszajca</strong></p>
+<p>Funkcja użyteczności, implementacja komunikacji przez OSC od strony Pythona, pętla gry w Pythonie.</p>
+</div>
+</div>
+</div></div>
+</section>
+<section id="zasady-gry-i-warunki-zakończenia" class="slide level2">
+<h2>Zasady gry i warunki zakończenia</h2>
+<div class="numbered-grid">
+<div class="numbered-step">
+<div class="step-num">
+<p>01</p>
+</div>
+<div class="step-body">
+<p><strong>Arena 2D i stan początkowy</strong></p>
+<p>Dwóch graczy (czerwony i niebieski) o identycznej prędkości. Każda drużyna ma bazę z flagą. Na arenie mogą wystować przeszkody blokujące ruch. Start we własnych bazach.</p>
+</div>
+</div>
+<div class="numbered-step">
+<div class="step-num">
+<p>02</p>
+</div>
+<div class="step-body">
+<p><strong>Podnoszenie i dostarczanie flagi</strong></p>
+<p>Podniesienie następuje przez zbliżenie (maks. 1 flaga, brak dobrowolnego upuszczania). Dostarczenie flagi wroga, gdy własna jest w bazie przeciwnika, zamienia flagi miejscami (stan początkowy).</p>
+</div>
+</div>
+<div class="numbered-step">
+<div class="step-num">
+<p>03</p>
+</div>
+<div class="step-body">
+<p><strong>Zwycięstwo przez flagi</strong></p>
+<p>Mecz kończy się natychmiastowym zwycięstwem drużyny, w której bazie znajdą się jednocześnie flagi obu zespołów.</p>
+</div>
+</div>
+<div class="numbered-step">
+<div class="step-num">
+<p>04</p>
+</div>
+<div class="step-body">
+<p><strong>Punkty terytorialne i limit czasu</strong></p>
+<p>Maksymalny czas rozgrywki wynosi 3 minuty. Za każdą sekundę na połowie przeciwnika gracz dostaje 1 pkt, a uzbieranie 91 pkt (50% czasu + 1) daje wygraną. W przeciwnym razie następuje remis.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mechanika-kolizji-między-postaciami" class="slide level2">
+<h2>Mechanika kolizji między postaciami</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sytuacja kolizji</th>
+<th style="text-align: left;">Co dzieje się z flagami</th>
+<th style="text-align: left;">Reakcja postaci</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>1. Żadna postać nie niesie flagi</strong></td>
+<td style="text-align: left;">Brak zmian - flagi pozostają w bazach</td>
+<td style="text-align: left;">Postacie swobodnie przez siebie przenikają</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2. Jedna postać niesie flagę</strong></td>
+<td style="text-align: left;">Przenoszona flaga natychmiast wraca do swojej bazy</td>
+<td style="text-align: left;">Niosący zostaje odrzucony w kierunku przeciwnym do wroga i ogłuszony na 2,5 s</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3. Obie postacie niosą flagę</strong></td>
+<td style="text-align: left;">Obie flagi wracają do swoich baz</td>
+<td style="text-align: left;">Obie postacie zostają odrzucone od siebie i ogłuszone</td>
+</tr>
+</tbody>
+</table>
+<div class="footer-note-light">
+<p><strong>Implementacja w UE5:</strong> Domyślna odpowiedź kolizji z innymi obiektami klasy <code>Pawn</code> ustawiona jest na <code>Overlap</code>, dzięki czemu zderzenia są przetwarzane wyłącznie wtedy, gdy wymaga tego stan flag.</p>
+</div>
+</section>
+<section id="architektura-systemu-ue5-i-python" class="slide level2">
+<h2>Architektura systemu: UE5 i Python</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="arch-card">
+<div class="arch-num">
+<p>UE5</p>
+</div>
+<div class="card-body">
+<p><strong>Silnik symulacji (Unreal Engine 5)</strong></p>
+<p>Odpowiada za ruch postaci, obsługę flag, wykrywanie kolizji, liczenie czasu i punktów oraz rozstrzyganie zwycięzcy. Udostępnia stan rozgrywki i realizuje cele ruchu z Pythona.</p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="arch-card">
+<div class="arch-num">
+<p>PY</p>
+</div>
+<div class="card-body">
+<p><strong>Moduł decyzyjny (Python)</strong></p>
+<p><strong>Algorytmy AI agentów:</strong> wyznaczają kolejne współrzędne docelowe na podstawie bieżącego stanu gry.</p>
+<p><strong>Optymalizator (Optuna):</strong> testuje zestawy wag funkcji użyteczności i dostosowywuje konfigurację na bazie wyników meczy.</p>
+</div>
+</div>
+</div></div>
+<div class="footer-note-light">
+<p><strong>Komunikacja:</strong> Dane między Pythonem a Unreal Engine 5 przesyłane są za pomocą protokołu OCS.</p>
+</div>
+</section>
+<section id="implementacja-w-unreal-engine-5" class="slide level2">
+<h2>Implementacja w Unreal Engine 5</h2>
+<p>Projekt zbudowano na bazie szablonu <strong>Third Person</strong> z domyślnym obiektem <code>Pawn</code> jako swobodną kamerą obserwatora (<code>WASD + mysz</code>).</p>
+<div class="timeline-light">
+<div class="time-box-light">
+<p><span class="badge">Poziom</span></p>
+<p><strong>L_FacingWorlds</strong></p>
+<p>Uproszczona analogia klasycznej mapy CTF w kształcie kanciastej lemniskaty. Zawiera bazy, boty, <code>static mesh</code> mapy, element <code>NavMeshBoundsVolume</code>.</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">GameMode</span></p>
+<p><strong>BP_GameMode</strong></p>
+<p>Liczenie punktów, czasu (<code>DeltaTime</code>) i zwycięzcy (flagi <code>Boolean</code>); obsługa połączenia OSC i ustawianie <code>Pathfinding Goal</code>.</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Postać</span></p>
+<p><strong>BP_CTFGuy</strong></p>
+<p>Zmodyfikowany <code>Character</code>; ruch w <code>EventTick</code> (<code>Find Path to Location Sync</code>), kolor drużyny, mesh flagi, wyłączenie symulacji fizyki (<em>Ragdoll</em>) przy ogłuszeniu i respawn.</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Baza</span></p>
+<p><strong>BP_Base</strong></p>
+<p>Aktor z dynamicznym kolorem drużyny; wykorzystywany przez <code>BP_CTFGuy</code> do wykrywania obecności bota na obszarze bazy.</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Interfejs</span></p>
+<p><strong>BP_UI</strong></p>
+<p><code>User Widget</code> pobierający aktualny stan meczu z <code>BP_GameMode</code> i wyświetlający wyniki na ekranie.</p>
+</div>
+</div>
+<div class="footer-note-light">
+<p><strong>Oprawa wizualna:</strong> Zastosowano proste, kontrastowe materiały dla drużyn (niebiescy / czerwoni), baz, areny i UI, zapewniające czytelność obserwacji meczy.</p>
+</div>
+</section>
+<section id="protokół-komunikacji-osc-udp" class="slide level2">
+<h2>Protokół komunikacji OSC (UDP)</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<div class="arch-card">
+<div class="arch-num">
+<p>01</p>
+</div>
+<div class="card-body">
+<p><strong>Inicjalizacja (<code>init</code>, co 0,5 s)</strong></p>
+<p>UE5 wysyła współrzędne baz <code>(b1_x, b1_y, b2_x, b2_y)</code>. Python oblicza punkty mapy (<code>eval_map_points</code>) i odsyła potwierdzenie <code>ok</code>.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>02</p>
+</div>
+<div class="card-body">
+<p><strong>Główna pętla gry (<code>step</code>, co 0,25 s)</strong></p>
+<p>UE5 przesyła pozycje graczy oraz flagi <code>(p1_carryFlag, p2_carryFlag)</code>. Python uruchamia wybrane AI i zwraca cele <code>(p1_dest, p2_dest)</code>.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>03</p>
+</div>
+<div class="card-body">
+<p><strong>Zakończenie gry (<code>end</code>, co 0,25 s)</strong></p>
+<p>UE5 wysyła <code>winnerPlayerId</code>. Python odpowiada <code>ok</code> (koniec) lub <code>reset</code> (restart rozgrywki w aktywnym trybie treningu).</p>
+</div>
+</div>
+</div><div class="column" style="width:42%;">
+<h3 id="niezawodność-nad-udp">Niezawodność nad UDP</h3>
+<p>Protokół <strong>OSC / UDP</strong> nie gwarantuje dostarczenia ani kolejności pakietów, dlatego wprowadzono:</p>
+<ul>
+<li><strong>Retransmisję w pętli</strong> kluczowych komunikatów do czasu otrzymania ACK (<code>receivedPacketId</code>).</li>
+<li><strong>Numerację <code>packetId</code></strong> pozwalającą odrzucać przestarzałe pakiety.</li>
+<li><strong>Zabezpieczenie idempotentności</strong> (<code>match_active</code>, <code>last_end_response</code> w <code>main.py</code>), aby powtórzone pakiety <code>end</code> nie aktualizowały trenera wielokrotnie.</li>
+</ul>
+</div></div>
+</section>
+<section id="integracja-algorytmów-ai-cli" class="slide level2">
+<h2>Integracja algorytmów AI (CLI)</h2>
+<p>Dla każdego z dwóch botów (<code>-p1</code>, <code>-p2</code>) można niezależnie wybrać jeden z 5 trybów działania przy uruchamianiu aplikacji Python:</p>
+<div class="timeline-light">
+<div class="time-box-light">
+<p><span class="badge">Tryb 1 · st</span></p>
+<p><strong>simple_tree</strong></p>
+<p>Proste drzewo decyzyjne stanowiące podstawowy punkt odniesienia (baseline).</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Tryb 2 - at</span></p>
+<p><strong>advanced_tree</strong></p>
+<p>Rozbudowane drzewo decyzyjne z bardziej złożonymi regułami taktycznymi.</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Tryb 3 - uf</span></p>
+<p><strong>utility_function</strong></p>
+<p>Deterministyczna funkcja użyteczności z domyślnymi parametrami <code>DEFAULT_PARAMS</code>.</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Tryb 4 - train</span></p>
+<p><strong>train</strong></p>
+<p>Optymalizacja parametrów w Optunie od wartości domyślnych (<code>-n</code>, domyślnie 50; maks. 1 bot naraz).</p>
+</div>
+<div class="time-box-light">
+<p><span class="badge">Tryb 5 · tuf</span></p>
+<p><strong>trained_utility_function</strong></p>
+<p>Funkcja użyteczności z wczytanymi z pliku JSON ostatnio wytrenowanymi parametrami.</p>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="co"># Przykładowe uruchomienia z terminala</span></span>
+<span id="cb1-2"><a href=""></a><span class="ex">python</span> main.py <span class="at">-p1</span> train <span class="at">-p2</span> advanced_tree <span class="at">-n</span> 50</span>
+<span id="cb1-3"><a href=""></a><span class="ex">python</span> main.py <span class="at">-p1</span> trained_utility_function <span class="at">-p2</span> utility_function</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="funkcja-użyteczności-model-matematyczny" class="slide level2">
+<h2>Funkcja użyteczności — model matematyczny</h2>
+<div class="math-box">
+<p><span class="math display">\[c^* = \arg\max_{c \in C} \Big( U_{\text{base}}(c) + U_{\text{tactical}}(c \mid S) \Big), \qquad U_{\text{base}}(c) = w_{\text{terr}} \cdot T(c) - w_{\text{travel}} \cdot \hat{d}(p_{\text{my}}, c)\]</span></p>
+</div>
+<table class="caption-top">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Stan flag <span class="math inline">\((f_{\text{my}}, f_{\text{en}})\)</span></th>
+<th style="text-align: left;">Tryb taktyczny</th>
+<th style="text-align: left;">Postać składnika <span class="math inline">\(U_{\text{tactical}}(c \mid S)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\((0, 0)\)</span></td>
+<td style="text-align: left;"><strong>Atak</strong></td>
+<td style="text-align: left;"><span class="math inline">\(-w_{\text{goal}} \cdot \hat{d}(c, b_{\text{en}})\)</span> <br> <em>Dążenie po flagę przeciwnika</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\((1, 0)\)</span></td>
+<td style="text-align: left;"><strong>Powrót</strong></td>
+<td style="text-align: left;"><span class="math inline">\(-w_{\text{goal}} \cdot \hat{d}(c, b_{\text{my}}) - w_{\text{threat}} \cdot \alpha \cdot \Phi(c)\)</span> <br> <em>Powrót do bazy z barierą odpychającą od wroga (<span class="math inline">\(\epsilon\)</span>)</em></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\((0, 1)\)</span></td>
+<td style="text-align: left;"><strong>Obrona</strong></td>
+<td style="text-align: left;">Jeśli <span class="math inline">\(\hat{d}(p_{\text{my}}, p_{\text{en}}) \le \beta \hat{d}(p_{\text{en}}, b_{\text{en}})\)</span>: <span class="math inline">\(-w_{\text{int}}(\gamma \cdot \text{pościg} + (1-\gamma) \cdot \text{odcięcie})\)</span> <br> <em>W przeciwnym razie: kontratak</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\((1, 1)\)</span></td>
+<td style="text-align: left;"><strong>Standoff</strong></td>
+<td style="text-align: left;">Bliżej bazy: powrót; dalej: <span class="math inline">\(-w_{\text{int}} \cdot \hat{d}(c, p_{\text{en}})\)</span> <br> <em>Wymuszenie resetu</em></td>
+</tr>
+</tbody>
+</table>
+<div class="footer-note-light">
+<p><strong>Zbiór kandydatów <span class="math inline">\(C\)</span>:</strong> Punkty mapy <span class="math inline">\(M\)</span> (z odfiltrowaniem osiągniętych punktów pośrednich w promieniu <span class="math inline">\(r_{\text{arr}}\)</span>) oraz pozycja przeciwnika <span class="math inline">\(p_{\text{en}}\)</span>, gdy niesie on flagę.</p>
+</div>
+</section>
+<section id="optymalizacja-parametrów-optuna-przebieg-treningu" class="slide level2">
+<h2>Optymalizacja parametrów (Optuna) — przebieg treningu</h2>
+<div id="5614a7e7" class="cell" data-fig-width="11.4" data-fig-height="4.5" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ctf_presentation_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="1772" height="725"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="wyniki-i-obserwacje-z-rozgrywek" class="slide level2">
+<h2>Wyniki i obserwacje z rozgrywek</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Zestawienie (P1 vs P2)</th>
+<th style="text-align: center;">Wygrane P1</th>
+<th style="text-align: center;">Wygrane P2</th>
+<th style="text-align: center;">Śr. czas meczu</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>simple_tree</code> vs <code>advanced_tree</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">32,43</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>advanced_tree</code> vs <code>utility_function</code></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">44,13</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>utility_function</code> vs <code>trained_utility_function</code></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">80,23</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>advanced_tree</code> vs <code>trained_utility_function</code></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">89,98</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div class="numbered-grid">
+<div class="numbered-step">
+<div class="step-num">
+<p>01</p>
+</div>
+<div class="step-body">
+<p><strong>Efekt optymalizacji w Optunie</strong></p>
+<p>Dzięki możliwości treningu model nauczył się znajdować skuteczne strategie w podanych zasadach, i poradził sobie lepiej od ręcznie strojonych modeli</p>
+</div>
+</div>
+<div class="numbered-step">
+<div class="step-num">
+<p>02</p>
+</div>
+<div class="step-body">
+<p><strong>Obserwacje zachowań na arenie</strong></p>
+<p>Skuteczną strategią okazało się podjęcie próby wygrania na punkty, i atakowanie tylko wtedy gdy ma się pewną okazję do ominięcia obrony przeciwnika.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="podsumowanie-i-kierunki-rozwoju" class="slide level2">
+<h2>Podsumowanie i kierunki rozwoju</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="co-udało-się-zrealizować">Co udało się zrealizować</h3>
+<div class="arch-card">
+<div class="arch-num">
+<p>1</p>
+</div>
+<div class="card-body">
+<p><strong>Środowisko gry w UE5</strong></p>
+<p>Kompletna mini-gra CTF 1v1 na mapie <code>L_FacingWorlds</code> z AI, punktacją i interfejsem.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>2</p>
+</div>
+<div class="card-body">
+<p><strong>Komunikacja OSC i automatyzacja</strong></p>
+<p>Stabilna wymiana stanu przez OSC, oraz automatyczny restart rozgrywek w pętli treningowej.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>3</p>
+</div>
+<div class="card-body">
+<p><strong>Moduł AI i optymalizacja</strong></p>
+<p>Dwa drzewa decyzyjne, funkcja użyteczności oraz strojenie parametrów w Optunie.</p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="możliwości-dalszego-rozwoju">Możliwości dalszego rozwoju</h3>
+<div class="arch-card">
+<div class="arch-num">
+<p>X</p>
+</div>
+<div class="card-body">
+<p><strong>Rozgrywka zespołowa (2v2 / 3v3)</strong></p>
+<p>Wprowadzenie wielu agentów w drużynie z podziałem ról (atak / obrona) i koordynacją decyzji.</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>X</p>
+</div>
+<div class="card-body">
+<p><strong>Uczenie ze wzmocnieniem i self-play</strong></p>
+<p>Trening agentów w trybie <em>self-play</em> lub zastąpienie statycznych wag siecią neuronową (RL).</p>
+</div>
+</div>
+<div class="arch-card">
+<div class="arch-num">
+<p>X</p>
+</div>
+<div class="card-body">
+<p><strong>Bogatsze środowisko areny</strong></p>
+<p>Dynamiczne przeszkody, losowe układy map oraz ciągłe sterowanie ruchem zamiast dyskretnych waypointów.</p>
+</div>
+</div>
+</div></div>
+<div class="footer-note-light">
+<p><strong>Dziękujemy za uwagę!</strong></p>
+</div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="ctf_presentation_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="ctf_presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="ctf_presentation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="ctf_presentation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
